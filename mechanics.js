@@ -5,11 +5,11 @@ function checkPowerHouseStatus(statusRequest) {
     switch (statusRequest) {
         case 'on':
             powerHouse(statusRequest);
-            console.log('The light is already turned on!');
+            // console.log('The light is already turned on!');
             break;
         case 'off':
             powerHouse(statusRequest);
-            console.log('The light is off');
+            // console.log('The light is off');
             break;
     }
 }
@@ -19,18 +19,18 @@ function powerHouse(checkIfLightIsOnOrOff) {
 
     if (checkIfLightIsOnOrOff === 'on') {
         powerHouseStatus = 'on';
-        // console.log(powerHouseStatus);
+        console.log(powerHouseStatus);
     }
 
     if (checkIfLightIsOnOrOff === 'off') {
         powerHouseStatus = 'off';
-        // console.log(powerHouseStatus);
+        console.log(powerHouseStatus);
+        if (powerHouseStatus = 'off') {
+            
+        }
     }
 }
 
-
-
-// powerHouse('off')
 
 
 
