@@ -1,38 +1,42 @@
-/*
----@@--2. Create helperFunctions
-*/
-TODO:
-// ---@@--helperFunc1.
+// Export individual functions, not as an object
+export { checkPowerHouseStatus, powerHouse };
+
 function checkPowerHouseStatus(statusRequest) {
+    switch (statusRequest) {
+        case 'on':
+            powerHouse(statusRequest);
+            console.log('The light is already turned on!');
+            break;
+        case 'off':
+            powerHouse(statusRequest);
+            console.log('The light is off');
+            break;
+    }
+}
 
-// sideIdea: if currentStatusOfPowerHouseOn === 'on' // return lightIsOn
+function powerHouse(checkIfLightIsOnOrOff) {
+    let powerHouseStatus = '';
 
-        switch(statusRequest === 'on' || statusRequest === 'off') {
-            case (statusRequest === 'on'): return powerHouseLightIsOn(), console.log('The light is already turned on!')
+    if (checkIfLightIsOnOrOff === 'on') {
+        powerHouseStatus = 'on';
+        // console.log(powerHouseStatus);
+    }
+
+    if (checkIfLightIsOnOrOff === 'off') {
+        powerHouseStatus = 'off';
+        // console.log(powerHouseStatus);
+    }
+}
 
 
-            case (statusRequest === 'off'): return powerHouseStatusOff()
-        };
 
-
-    };
+// powerHouse('off')
 
 
 
 
 /*
-TODO:
----@@--helperFunc2. powerHouse() {
-    let powerHouseStatusOn = 'on'
-    let powerHouseStatusOff = 'off'
-};
-
-
-
-
-
-
-TODO:
+// TODO:
 // ---@@--helperFunc3.
 function powerHouseLightIsOn() {
    //WorkFlow if statusRequest is received as 'on'
@@ -64,13 +68,13 @@ function powerHouseLightIsOn() {
 
 
 
-TODO:
+// TODO:
 helperFunc4. powerHouseLightIsOff() {};
 
 
 
 
-TODO:
+// TODO:
 helperFunc5.
 helperFunc1
 helperFunc1
