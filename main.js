@@ -1,7 +1,10 @@
 import { controlLight } from './mechanics.js';
 
-controlLight(); // Call controlLight without arguments
+controlLight();
 
+
+
+// Call controlLight without arguments
 
 // import { checkPowerHouseStatus, powerHouse } from './functions.js';
 // import readline from 'readline';

@@ -1,34 +1,65 @@
-import { askUserToToggleLight } from './functions.js';
+import readline from 'readline';
 
-export async function controlLight() {
-    const userChoice = await askUserToToggleLight();
+let lightStatus = 'off'; // Initialize light status
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
 
-    if (userChoice === 'on') {
-        checkPowerHouseStatus('on');
-        console.log('The lights are turned on!');
-    } else if (userChoice === 'off') {
-        checkPowerHouseStatus('off');
-        console.log('Lights are still off.');
-    } else {
-        console.log('Invalid input. Please type "on" or "off".');
+let timer; // Add a timer variable
+
+async function controlLight() {
+    console.log('There is a light switch here.');
+
+    const response = await askUserToToggleLight();
+
+    if (response === 'on') {
+        if (lightStatus === 'on') {
+            console.log('The light is already turned on!');
+            askUserToKeepLightsOn();
+        } else {
+            lightStatus = 'on';
+            console.log('The lights are turned on!');
+            askUserToKeepLightsOn();
+        }
+    } else if (response === 'off') {
+        if (lightStatus === 'off') {
+            console.log('The light is already turned off.');
+        } else {
+            console.log('The light is off');
+        }
+        rl.close();
     }
 }
 
-export function checkPowerHouseStatus(statusRequest) {
-    let powerHouseStatus = powerHouse(statusRequest);
-
-    if (statusRequest === 'on') {
-        console.log('The light is already turned on!');
-    } else if (statusRequest === 'off') {
-        console.log('The light is off');
-    }
+function askUserToKeepLightsOn() {
+    rl.question('Do you want to keep the lights on? (Type "yes" or "no"): ', (answer) => {
+        if (answer.toLowerCase() === 'yes') {
+            console.log('The lights will stay on.');
+            // No need to set a timer; it will stay on until the user decides to turn it off.
+        } else if (answer.toLowerCase() === 'no') {
+            lightStatus = 'off';
+            console.log('The lights are turned off.');
+        } else {
+            console.log('Invalid input. Please type "yes" or "no."');
+            askUserToKeepLightsOn();
+        }
+        rl.close(); // Close the readline interface when done.
+    });
 }
 
-export function powerHouse(checkIfLightIsOnOrOff) {
-    let powerHouseStatus = checkIfLightIsOnOrOff === 'on' ? 'on' : 'off';
-    console.log(powerHouseStatus);
-    return powerHouseStatus;
+async function askUserToToggleLight() {
+    return new Promise((resolve) => {
+        rl.question('Do you want to turn it on or off? (Type "on" or "off"): ', (answer) => {
+            resolve(answer.toLowerCase());
+        });
+    });
 }
+
+export { controlLight };
+
+
+
 
 
 
